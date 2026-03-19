@@ -1,0 +1,1 @@
+from .streamvggt import StreamVGGTInference

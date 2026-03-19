@@ -1,0 +1,144 @@
+# Video SfM Trajectory Post-Verification & Repair Configuration
+# All thresholds and strategies configuration file
+
+# ============================================================================
+# Stage A: Quick DB check thresholds
+# ============================================================================
+stage_a:
+  # RANSAC inlier count minimum threshold
+  min_inlier_count: 80
+  # Inlier ratio minimum threshold
+  min_inlier_ratio: 0.2
+  
+  # Adaptive mode: If the overall matching number of a sequence is too low, the absolute threshold can be lowered
+  adaptive: true
+  # Adaptive percentile minimum threshold
+  adaptive_percentile: 10
+
+# ============================================================================
+# Stage B: Precise geometric check thresholds
+# ============================================================================
+stage_b:
+  # Symmetric epipolar error (pixel units)
+  # median < epi_median_max and p95 < epi_p95_max pass
+  epi_median_max: 1.5
+  epi_p95_max: 4.0
+  
+  # Re-RANSAC-E inlier ratio minimum threshold
+  ransac_e_min_inlier_ratio: 0.25
+  # RANSAC-E parameters
+  ransac_threshold: 1.0  # Pixel error threshold (normalized coordinates)
+  ransac_confidence: 0.999
+  ransac_max_iters: 2000
+  
+  # Triangulation angle check (optional, degrees)
+  # If the relative rotation angle < triangulation_angle_min, it is considered degenerate
+  triangulation_angle_min: 1.0
+
+# ============================================================================
+# Kinematic continuity check
+# ============================================================================
+kinematics:
+  # Translation jump MAD z-score threshold
+  translation_mad_z_threshold: 8.0
+  
+  # Rotation jump absolute threshold (degrees)
+  rotation_angle_max: 45.0
+  # Rotation jump MAD z-score threshold
+  # Increased to 50 to avoid misjudgment of normal rotation
+  rotation_mad_z_threshold: 50.0
+  
+  # Forward flip angle threshold (degrees)
+  # If cos(angle) < cos(forward_flip_angle_max), it is considered a flip
+  forward_flip_angle_max: 120.0
+  
+  # Second-order smoothness check (acceleration anomaly)
+  # Disable second-order check to avoid jump affecting surrounding frames
+  enable_second_order: false
+  # Second-order translation MAD z-score threshold (increased to avoid misjudgment)
+  translation_accel_mad_z_threshold: 20.0
+  # Second-order rotation MAD z-score threshold (increased to avoid misjudgment)
+  rotation_accel_mad_z_threshold: 50.0
+
+# ============================================================================
+# Repair strategy
+# ============================================================================
+repair:
+  # Maximum consecutive bad points that can be repaired (including boundaries)
+  max_repairable_run: 2
+  
+  # Position interpolation method: linear | cubic
+  position_interp_method: "cubic"
+  
+  # Rotation interpolation: quaternion SLERP
+  # If the rotation angle of the two endpoints > max_slerp_angle, interpolation is abandoned
+  max_slerp_angle: 90.0
+  
+  # Post-interpolation validation: must be re-passed by Stage A/B/Kinematics
+  post_repair_validation: true
+  
+  # Missing frames (unregistered frames) maximum interpolable gap
+  max_gap_frames: 2
+
+# ============================================================================
+# Decision strategy
+# ============================================================================
+decision:
+  # Maximum allowed consecutive bad points (exceeds triggers discard)
+  max_bad_run: 3
+  
+  # Maximum bad point ratio (exceeds discards entire case)
+  max_bad_ratio: 0.10  # 10%
+  
+  # Distance multiplier anomaly check (added)
+  # Used to detect overall smoothness of trajectory: check for abnormal distance in the middle segment (excluding the first and last 5 frames that can be interpolated)
+  distance_multiplier_threshold: 3.0      # Middle segment distance > N times median is considered abnormal
+  distance_outlier_ratio_threshold: 0.1  # Middle segment abnormal transition ratio > 10% discards
+  
+  # Minimum healthy frames to retain after segmenting (deprecated)
+  min_healthy_frames: 20
+
+# ============================================================================
+# Strict mode
+# ============================================================================
+strict_mode:
+  enabled: false
+  # When enabled, increase all thresholds
+  # Adjustment: To filter out 11 problem cases, stricter standards are needed
+  # - min_inlier needs to be increased to 400 (80*5.0) to filter low-quality matches
+  # - kinematics z-score threshold needs to be more sensitive (3.2) to capture jumps
+  # - rotation z-score threshold also needs to be more strict to filter extreme rotations
+  stage_a_multiplier: 5.0  # min_inlier_count *= 5.0 → 400 (was 1.5 → 120)
+  stage_b_epi_divider: 2.0  # epi_median_max /= 2.0 → 0.75px (was 1.5 → 1.0px)
+  kinematics_z_divider: 2.5  # translation_mad_z_threshold /= 2.5 → 3.2 (was 1.3 → 6.15)
+  kinematics_rotation_z_divider: 2.5  # rotation_mad_z_threshold /= 2.5 → 20.0 (added to filter extreme rotations)
+  repair_max_slerp_angle: 45.0  # Decreased to 45 degrees (was 60.0)
+  max_bad_ratio_override: 0.03  # Maximum bad point ratio in strict mode decreased to 3% (added to filter extreme rotations)
+
+# ============================================================================
+# Output settings
+# ============================================================================
+output:
+  # Output directory (relative to outputs/<case_id>/)
+  subdir: "postcheck"
+  
+  # Whether to save the repaired extrinsic.npy
+  save_repaired: true
+  
+  # Whether to generate visualization images
+  generate_visualization: true
+  
+  # Visualization parameters
+  viz_dpi: 150
+  viz_figsize: [12, 8]
+  
+  # Whether to output detailed logs
+  verbose: true
+
+# ============================================================================
+# Parallel processing
+# ============================================================================
+performance:
+  # Number of parallel workers when batch processing (0 means automatic)
+  num_workers: 0
+
