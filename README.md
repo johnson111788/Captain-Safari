@@ -1,7 +1,7 @@
-# Captain Safari: World Engine with Pose-Aligned 3D Memory
+# Captain Safari: World Engine with Pose-Aligned 3D Memory (CVPR 2026)
 
 [![license](https://img.shields.io/github/license/johnson111788/Captain-Safari.svg)](https://github.com/johnson111788/Captain-Safari/blob/main/LICENSE)
-[![open issues](https://isitmaintained.com/badge/open/johnson111788/Captain-Safari.svg)](https://github.com/johnson111788/Captain-Safari/issues)
+[![open issues](https://img.shields.io/github/issues/johnson111788/Captain-Safari.svg)](https://github.com/johnson111788/Captain-Safari/issues)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/johnson111788/Captain-Safari.svg)](https://GitHub.com/johnson111788/Captain-Safari/pull/)
 [![GitHub latest commit](https://badgen.net/github/last-commit/johnson111788/Captain-Safari)](https://GitHub.com/johnson111788/Captain-Safari/commit/) 
 
