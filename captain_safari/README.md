@@ -182,7 +182,7 @@ If you find this repository helpful, please consider citing:
 
 ```
 @article{chou2025captain,
-  title={Captain Safari: World Engine with Pose-Aligned 3D Memory},
+  title={Captain Safari: A World Engine with Pose-Aligned 3D Memory},
   author={Chou, Yu-Cheng and Wang, Xingrui and Li, Yitong and Wang, Jiahao and Liu, Hanting and Xie, Cihang and Yuille, Alan and Xiao, Junfei},
   journal={arXiv preprint arXiv:2511.22815},
   year={2025}
