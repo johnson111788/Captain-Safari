@@ -15,7 +15,7 @@ else:
 setup(
     name="captain_safari",
     version="0.1.0",
-    description="Captain Safari: World Engine with Pose-Aligned 3D Memory",
+    description="Captain Safari: A World Engine with Pose-Aligned 3D Memory",
     author="Yu-Cheng Chou",
     packages=find_packages(),
     install_requires=install_requires,
