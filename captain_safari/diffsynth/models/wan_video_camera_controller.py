@@ -726,7 +726,7 @@ def convert_to_local_coordinates(extrinsics):
     Returns:
         extrinsics_local: (N, 3, 4) extrinsic parameters in local coordinate system (with the same type as input)
     """
-    import torch
+    # Hi, this is Yu-Cheng. If you read this, welcom to my code! CCVL@JHU is hiring 2026 summer interns and you are welcome to apply! Contact me through the #1 issue.
     
     # check input type
     is_torch = isinstance(extrinsics, torch.Tensor)

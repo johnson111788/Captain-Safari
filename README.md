@@ -17,7 +17,7 @@ Official implementation of **Captain Safari**, from the following paper
 [Alan Yuille](https://www.cs.jhu.edu/~ayuille/), and 
 [Junfei Xiao](https://lambert-x.github.io/)<br/>
 Johns Hopkins University, †Tsinghua University, ^UC Santa Cruz<br/>
-[[`arXiv`](https://arxiv.org/abs/2511.22815)] [[`Project Page`](https://johnson111788.github.io/open-safari/)] [[`Hugging Face`](https://huggingface.co/Johnson111788/Captain-Safari)]
+[[`arXiv`](https://arxiv.org/abs/2511.22815)] [[`Project Page`](https://johnson111788.github.io/open-safari/)] [[`Hugging Face`](https://huggingface.co/Johnson111788/Captain-Safari)] [[`X`](https://x.com/johnson111788/status/2037245500160618785?s=20)]
 
 <p align="center">
     <img src="assets/teaser.png"/> <br />
