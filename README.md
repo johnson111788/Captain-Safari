@@ -8,7 +8,7 @@
 Official implementation of **Captain Safari**, from the following paper
 
 [Captain Safari: A World Engine with Pose-Aligned 3D Memory](https://johnson111788.github.io/open-safari/)<br/>
-[Yu-Cheng Chou](https://sites.google.com/view/yu-cheng-chou), 
+[Yu-Cheng Chou](https://johnson111788.github.io/), 
 [Xingrui Wang](https://xingruiwang.github.io/), 
 [Yitong Li†](https://openreview.net/profile?id=~Yitong_Li5), 
 [Jiahao Wang](https://jiahaoplus.github.io/), 
